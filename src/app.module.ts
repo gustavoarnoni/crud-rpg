@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb+srv://gustavoarnoni4:<batata123>@crud-rpg.4wvab35.mongodb.net/rpg-db?retryWrites=true&w=majority'),
+    MongooseModule.forRoot('mongodb+srv://gustavoarnoni4:batata123@crud-rpg.4wvab35.mongodb.net/crud-rpg?retryWrites=true&w=majority&ssl=true'),
     PersonagemModule,
   ],
   controllers: [AppController],

@@ -16,7 +16,7 @@ export interface Personagem extends Document {
   nomeAventureiro: string;
   classe: string;
   level: number;
-  força: number;
+  forca: number;
   defesa: number;
   itensMagicos: string[];
 }
