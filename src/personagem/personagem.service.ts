@@ -18,4 +18,16 @@ export class PersonagemService {
   async listarPersonagens(): Promise<Personagem[]> {
     return this.personagemModel.find().exec();
   }
+
+  async buscarPersonagemPorId(id: string): Promise<Personagem | null> {
+    return this.personagemModel.findById(id).exec();
+  }
+
+  async atualizarNomeAventureiro(id: string, nomeAventureiro: string): Promise<Personagem | null> {
+    return this.personagemModel.findByIdAndUpdate(id, { nomeAventureiro }, { new: true }).exec();
+  }
+
+  async removerPersonagem(id: string): Promise<Personagem | null> {
+    return this.personagemModel.findByIdAndDelete(id).exec();
+  }
 }
