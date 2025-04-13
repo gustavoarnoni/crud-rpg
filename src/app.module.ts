@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PersonagemModule } from './personagem/personagem.module';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb+srv://gustavoarnoni4:batata123@crud-rpg.4wvab35.mongodb.net/crud-rpg?retryWrites=true&w=majority&ssl=true'),
+    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/crud-rpg'),
     PersonagemModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
