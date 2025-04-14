@@ -6,8 +6,8 @@ export class ItemMagicoController {
   constructor(private readonly itemMagicoService: ItemMagicoService) {}
 
   @Post()
-  async criar(@Body() itemMagicoDto: any) {
-    return this.itemMagicoService.criarItemMagico(itemMagicoDto);
+  async criar(@Body() itemMagicoDto: any, @Body('personagemId') personagemId: string) {
+    return this.itemMagicoService.criarItemMagico(itemMagicoDto, personagemId);
   }
 
   @Get()

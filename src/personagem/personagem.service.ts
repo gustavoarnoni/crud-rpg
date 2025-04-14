@@ -6,15 +6,22 @@ import { CreatePersonagemDto } from './create-personagem.dto';
 
 @Injectable()
 export class PersonagemService {
+  itemMagicoModel: any;
   constructor(
     @InjectModel('Personagem') private readonly personagemModel: Model<Personagem>,
   ) {}
 
   async criarPersonagem(createPersonagemDto: CreatePersonagemDto): Promise<Personagem> {
+    const { força, defesa } = createPersonagemDto;
+  
+    if (força + defesa > 10) {
+      throw new Error('A soma de força e defesa não pode ultrapassar 10 pontos');
+    }
+  
     const personagem = new this.personagemModel(createPersonagemDto);
     return personagem.save();
   }
-
+  
   async listarPersonagens(): Promise<Personagem[]> {
     return this.personagemModel.find().exec();
   }
@@ -30,4 +37,17 @@ export class PersonagemService {
   async removerPersonagem(id: string): Promise<Personagem | null> {
     return this.personagemModel.findByIdAndDelete(id).exec();
   }
+
+  async adicionarItemMagico(personagemId: string, itemId: string): Promise<Personagem> {
+    const personagem = await this.personagemModel.findById(personagemId).exec();
+    const itemMagico = await this.itemMagicoModel.findById(itemId).exec();
+  
+    if (!personagem || !itemMagico) {
+      throw new Error('Personagem ou Item Mágico não encontrados');
+    }
+  
+    personagem.itensMagicos.push(itemMagico);
+    return personagem.save();
+  }
+  
 }

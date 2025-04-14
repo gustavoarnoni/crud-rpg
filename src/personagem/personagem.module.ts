@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
-import { PersonagemService } from './personagem.service';
-import { PersonagemController } from './personagem.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PersonagemController } from './personagem.controller';
+import { PersonagemService } from './personagem.service';
 import { PersonagemSchema } from './personagem.schema';
+import { ItemMagicoModule } from '../item-magico/item-magico.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Personagem', schema: PersonagemSchema }]),
+    ItemMagicoModule,
   ],
-  providers: [PersonagemService],
   controllers: [PersonagemController],
+  providers: [PersonagemService],
 })
 export class PersonagemModule {}
